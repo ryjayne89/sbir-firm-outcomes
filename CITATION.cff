@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software or the database it builds, please cite it as below."
+title: "SBIR/STTR Firm Outcomes Database"
+version: 1.2.0
+date-released: 2026-10-26
+license: MIT
+authors:
+  - family-names: Jayne
+    given-names: Ryan
+    orcid: "https://orcid.org/0009-0001-4662-9686"
+keywords:
+  - SBIR
+  - STTR
+  - innovation policy
+  - private capital
+  - record linkage

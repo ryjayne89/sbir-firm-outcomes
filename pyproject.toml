@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sbirfo"
+version = "1.2.0"
+description = "Firm-level database linking SBIR/STTR awards to SEC and SBA records"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "Ryan Jayne"}]
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.1",
+    "numpy>=1.26",
+    "pyarrow>=14",
+    "scipy>=1.11",
+    "scikit-learn>=1.3",
+    "rapidfuzz>=3.6",
+    "requests>=2.31",
+    "openpyxl>=3.1",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+sbirfo = "sbirfo.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
