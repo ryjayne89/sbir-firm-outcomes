@@ -15,6 +15,14 @@ The database links SBIR/STTR firms to
 * the education, income and population of each firm's ZIP code and surrounding area (Census ACS), and nearby colleges and research universities (IPEDS)
 * spatial and macroeconomic covariates (HUBZone status, Opportunity Zone tracts, nearby Regulation D capital, the federal funds rate)
 
+## Data
+
+The released database is archived on Zenodo at https://doi.org/10.5281/zenodo.23675933. Download `sbir_firm_outcomes_v1.2.0_data.zip` there to use the data without running the pipeline. It holds the CSV tables, a codebook, the provenance manifest, checksums and the validation results. The same record holds `sbir_firm_outcomes_v1.2.0_code.zip`, a copy of this repository at version 1.2.0.
+
+Please cite the data as
+
+Jayne, R. (2026). *SBIR/STTR Firm Outcomes Database: A Firm-Year Panel Linking Federal R&D Awardees to SEC, Patent, Procurement and Loan Records, 1983–2026* (Version 1.2.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.23675933
+
 ## Quick start
 
 ```bash
@@ -38,7 +46,7 @@ Two hosts often refuse scripted requests from cloud machines. When that happens 
 | PatentsView Granted Patent Disambiguated Data (PVGPATDIS) and Pre-Grant Publication Disambiguated Data (PVPGPUBDIS), the `g_*` and `pg_*` tables | https://data.uspto.gov/bulkdata | `data/raw/patents/` |
 | Patent Assignment Data for Academia and Researchers (ECORSEXC), Stata or TSV files `assignment`, `assignment_conveyance`, `assignor`, `assignee`, `documentid` | https://data.uspto.gov/bulkdata | anywhere under `data/raw/patents/` |
 
-The releases used for version 1.1.0 are listed in `docs/methods.md`. The patent step uses files on disk first and tries the old PatentsView download links only for tables it cannot find. Tables may be zipped, unzipped, or unzipped into a folder of the same name, as Google Drive often leaves them. The patent step needs `g_patent`, `g_application`, `g_assignee_disambiguated` and `g_location_disambiguated`; the remaining tables (`g_cpc_current`, `g_wipo_technology`, `g_inventor_disambiguated`, `g_us_patent_citation`, `g_gov_interest`, `g_gov_interest_contracts`, `g_gov_interest_org`, `pg_published_application`, `pg_assignee_disambiguated`) each add fields and are skipped when absent.
+The releases used for version 1.2.0 are listed in `docs/methods.md`. The patent step uses files on disk first and tries the old PatentsView download links only for tables it cannot find. Tables may be zipped, unzipped, or unzipped into a folder of the same name, as Google Drive often leaves them. The patent step needs `g_patent`, `g_application`, `g_assignee_disambiguated` and `g_location_disambiguated`; the remaining tables (`g_cpc_current`, `g_wipo_technology`, `g_inventor_disambiguated`, `g_us_patent_citation`, `g_gov_interest`, `g_gov_interest_contracts`, `g_gov_interest_org`, `pg_published_application`, `pg_assignee_disambiguated`) each add fields and are skipped when absent.
 
 Every raw file, whether downloaded by the pipeline or by hand, is recorded in `data/raw/MANIFEST.csv` with its source URL, retrieval time, size and SHA-256 hash.
 
@@ -67,7 +75,7 @@ Every raw file, whether downloaded by the pipeline or by hand, is recorded in `d
 
 ## Validating the linkage
 
-`validate` writes `data/validation/label_sheet.csv`. It contains a simple random sample of 300 firms, which yields precision and recall, and 40 linked pairs per tier, which yields precision by tier. Each row has a link to an EDGAR company search. For every row, enter in `true_cik` the CIK or CIKs that belong to the firm, separated by semicolons, or `none` if EDGAR has no filer for it. Save the result as `label_sheet_labeled.csv` in the same folder and rerun `--steps validate release`. The scores, with Wilson 95% intervals, go to `validation_results.csv` and into the release.
+`validate` writes `data/validation/label_sheet.csv`. It contains a simple random sample of 300 firms, which yields precision and recall, and 40 linked pairs per tier, which yields precision by tier. Each row has a link to an EDGAR company search. For every row, enter in `true_cik` the CIK or CIKs that belong to the firm, separated by semicolons, or `none` if EDGAR has no filer for it. Save the result as `label_sheet_labeled.csv` in the same folder and rerun `--steps validate release`. The scores, with Wilson 95% intervals, go to `validation_results.csv` and into the release. In version 1.2.0, the first 200 random firms were labeled, giving precision of 100% (41 of 41 links correct) and recall of 95% (41 of 43 SEC filers found).
 
 ## Interpreting the outcomes
 
