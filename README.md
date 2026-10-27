@@ -106,6 +106,3 @@ pytest
 
 Code is released under the MIT License. The released data are CC-BY-4.0; all inputs are public records of the U.S. government. Citation metadata are in `CITATION.cff`.
 
-## Figures
-
-`python figures/make_figures.py --data-dir <DATA_DIR>/processed --out figures/out` writes seven single-panel descriptive figures (PNG and PDF) from the release tables. Event-time figures use a balanced cohort, counting every firm in every year of the window.
